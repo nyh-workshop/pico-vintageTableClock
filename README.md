@@ -12,9 +12,11 @@ Currently, the features are:
 - The screen is a generic ST7920 and it is driven by the [U8G2](https://github.com/olikraus/u8g2) library and connected to the Pico using SPI. You can check the submodule [here](https://github.com/nyh-workshop/pico-u8g2-st7920).
 - Rotary Encoder to set the time.
 - RP2040's internal RTC module to keep and tell the time.
+- Using DHT-11 module to get the temperature and humidity! Thanks to the library provided ([pico_dht](https://github.com/vmilea/pico_dht/tree/master)).
 
 Limitations:
 - Currently no way to stop melody when it is currently playing.
 - No battery backup for the internal RTC module.
+- No error messages when DHT-11 module gives wrong results, only not showing the results on the screen.
 
 Schematics coming soon! :D

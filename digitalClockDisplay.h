@@ -1,15 +1,10 @@
 #ifndef DIGITALCLOCKDISPLAY_H
 #define DIGITALCLOCKDISPLAY_H
 
-#include "st7920_spi_u8g2_hal.h"
-
-#include <stdio.h>
-#include "pico/stdlib.h"
-#include "pico/float.h"
-
 #include "main.h"
 
 extern U8G2_ST7920_128X64_1_HW_SPI_CUSTOM u8g2;
+extern dht_t dht;
 
 enum whichDigitToBlink
 {

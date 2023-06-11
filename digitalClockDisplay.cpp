@@ -32,9 +32,19 @@ void digitalClockDisplay::drawClockDisplay(datetime_t* aDateTime, whichDigitToBl
     char date_str[16];
     char day_str[4];
 
+    char temp_str[8];
+    char humidity_str[8];
+
+    float humidity;
+    float temp_c;
+
     rtc_get_datetime(aDateTime);
 
+
     uint8_t hour12 = (aDateTime->hour > 12) ? abs(aDateTime->hour - 12) : aDateTime->hour;
+
+    dht_start_measurement(&dht);
+    dht_result_t dht_result = dht_finish_measurement_blocking(&dht, &humidity, &temp_c);
 
     u8g2.clearBuffer();
     u8g2.setDrawColor(1);
@@ -49,6 +59,16 @@ void digitalClockDisplay::drawClockDisplay(datetime_t* aDateTime, whichDigitToBl
     snprintf(day_str, sizeof(date_str), "%s", dayOfWeek3letter[aDateTime->dotw]);
     u8g2.drawStr(15, 60, day_str);
     u8g2.drawStr(52, 60, date_str);
+
+    // Displaying DHT-11 results here:
+    // Do not display wrong results here on the screen!!
+    if (dht_result == DHT_RESULT_OK)
+    {
+        snprintf(temp_str, sizeof(temp_str), "%02d%cC", (uint8_t)temp_c, 176);
+        snprintf(humidity_str, sizeof(humidity_str), "%02d%%", (uint8_t)humidity);
+        u8g2.drawStr(70, 9, temp_str);
+        u8g2.drawStr(108, 9, humidity_str);
+    }
 
     u8g2.setDrawColor(0);
     switch (aBlinkSelect)

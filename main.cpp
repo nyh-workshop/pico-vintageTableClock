@@ -5,7 +5,7 @@ const uint8_t RENCODER_CLK_PIN = 15;
 const uint8_t RENCODER_DT_PIN = 16;
 
 U8G2_ST7920_128X64_1_HW_SPI_CUSTOM u8g2(U8G2_R0);
-
+dht_t dht;
 digitalClockDisplay clkDisp;
 
 struct debounceInterruptTime {
@@ -215,17 +215,6 @@ int main()
         .sec = 50
     };
 
-    // Alarm once an hour!
-    datetime_t alarm = {
-        .year  = -1,
-        .month = -1,
-        .day   = -1,
-        .dotw  = -1,
-        .hour  = 6,
-        .min   = 0,
-        .sec   = 0
-    };
-
     gpio_init(SET_PIN);
     gpio_set_dir(SET_PIN, GPIO_IN);
     gpio_pull_up(SET_PIN);
@@ -241,6 +230,9 @@ int main()
     rtc_set_datetime(&t);
 
     multicore_launch_core1(core1_entry);
+
+    // pio0 is occupied (audio i2s module).
+    dht_init(&dht, DHT_MODEL, pio1, DHT_DATA_PIN, true /* pull_up */);
 
     u8g2.begin();
     u8g2.setBitmapMode(0);

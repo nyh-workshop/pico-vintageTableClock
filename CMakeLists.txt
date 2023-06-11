@@ -30,6 +30,8 @@ project(pico-vintageTableClock C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
+add_subdirectory(dht)
+
 # Add executable. Default name is the project name, version 0.1
 
 add_executable(pico-vintageTableClock main.cpp
@@ -86,6 +88,7 @@ target_link_libraries(pico-vintageTableClock
         hardware_dma
         hardware_interp
         u8g2
+        dht
         )
 
 pico_add_extra_outputs(pico-vintageTableClock)

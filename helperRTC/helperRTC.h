@@ -1,9 +1,6 @@
 #ifndef HELPERRTC_H
 #define HELPERRTC_H
 
-//#include "pico/stdlib.h"
-
-//#include "../digitalClockDisplay.h"
 #include "../main.h"
 
 extern class digitalClockDisplay clkDisp;

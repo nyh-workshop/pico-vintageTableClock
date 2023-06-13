@@ -49,7 +49,7 @@ void fmChannel::setChannelInstrument(std::string patchName) {
 			patch.ops[i] = inputPatch.ops[i];
 		}
 		for (uint8_t i = 0; i < MAX_OSC; i++) {
-			printf("%f %f %f \n", patch.ops[i].R0, patch.ops[i].R1, patch.ops[i].R3);
+			//printf("%f %f %f \n", patch.ops[i].R0, patch.ops[i].R1, patch.ops[i].R3);
 			// Load the levels first!
 			osc[i].adsr.setLevelsInFloat(patch.ops[i].L0, patch.ops[i].L1, patch.ops[i].L3);
 			osc[i].adsr.setRatesInSecs(patch.ops[i].R0, patch.ops[i].R1, patch.ops[i].R3);

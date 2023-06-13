@@ -54,7 +54,7 @@ private:
 template <typename T>
 Envelope<T>::Envelope() {
 	// all starts at zero at test!
-	printf("Creating envelope!\n");
+	// printf("Creating envelope!\n");
 
 	// Compatible data types: float and fixed point!
 	constexpr bool isFloat = std::is_same_v<T, float>;
@@ -89,7 +89,7 @@ Envelope<T>::Envelope() {
 
 template <typename T>
 Envelope<T>::~Envelope() {
-	printf("Deleting envelope!\n");
+	//printf("Deleting envelope!\n");
 }
 
 template <typename T>
@@ -232,7 +232,7 @@ void Envelope<T>::setRatesInSecs(float inputR0_s, float inputR1_s, float inputR3
 	// set for decay:
 	float numOfSamplesForDecay = inputR1_s / (float)(0.01f);
 	float temp1 = (-log((float)L1) / numOfSamplesForDecay);
-	printf("numOfSamplesForDecay: %f\n", numOfSamplesForDecay);
+	//printf("numOfSamplesForDecay: %f\n", numOfSamplesForDecay);
 	//printf("temp1: %f\n", temp1);
 	//R1 = (T)exp(-temp1);
 
@@ -256,9 +256,9 @@ void Envelope<T>::setRatesInSecs(float inputR0_s, float inputR1_s, float inputR3
 		R3 = (fixedPoint)exp(-temp2);
 	}
 
-	printf("R0: %f\n", (float)R0);
-	printf("R1: %f\n", (float)R1);
-	printf("R3: %f\n", (float)R3);
+	//printf("R0: %f\n", (float)R0);
+	//printf("R1: %f\n", (float)R1);
+	//printf("R3: %f\n", (float)R3);
 }
 
 template <typename T>

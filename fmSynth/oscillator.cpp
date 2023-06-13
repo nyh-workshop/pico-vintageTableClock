@@ -7,7 +7,7 @@ bool Oscillator::wavetableFilled = false;
 constexpr uint32_t SINE_440_TUNING_WORD = ((uint64_t)UINT32_MAX * 440ul) / FMSYNTH_SAMPLE_RATE; 
 
 Oscillator::Oscillator() {
-	printf("osc create!\n");
+	//printf("osc create!\n");
 
 	// Fill this wavetable once! :D
 	if (!wavetableFilled)
@@ -27,7 +27,7 @@ Oscillator::Oscillator() {
 }
 
 Oscillator::~Oscillator() {
-	printf("osc delete!\n");
+	//printf("osc delete!\n");
 }
 
 void Oscillator::configureInterpLanes() {

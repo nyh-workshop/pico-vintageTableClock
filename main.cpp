@@ -134,8 +134,7 @@ bool repeating_timer_callback_atCore1_bellStrike(struct repeating_timer *t) {
 void core1_entry()
 {
     printf("Entering core1! :D\n");
-    uint32_t owner;
-
+    
     // RP2040's interpolator module needs to be configured at the respective core before running.
     configureInterpLanes();
 
@@ -204,17 +203,48 @@ int main()
 {
     stdio_init_all();
 
-     // Example from the Pico SDK manual!
+    stdio_filter_driver(&stdio_usb);
+    while (!tud_cdc_connected())
+        sleep_ms(100);
+    printf("\nUSB Serial connected!\n");
+
+    // Example from the Pico SDK manual!
     datetime_t t = {
         .year = 2023,
-        .month = 06,
-        .day = 07,
-        .dotw = 3,
-        .hour = 15,
-        .min = 59,
-        .sec = 50
+        .month = 01,
+        .day = 01,
+        .dotw = 6,
+        .hour = 12,
+        .min = 00,
+        .sec = 00
     };
 
+    PicoDS3231 rtcExt(PICO_I2C_SDA_PIN, PICO_I2C_SCL_PIN, 100000);
+
+    // Get OSF of DS3231:
+    uint8_t DS3231_sreg;    
+    int32_t DS3231_readResult = rtcExt.readFromAddr(DS3231_STATUS, &DS3231_sreg);
+    
+    if(DS3231_readResult == PICO_ERROR_TIMEOUT || DS3231_readResult == PICO_ERROR_GENERIC)
+    {
+        printf("DS3231 not detected or error! Check connection!\n");
+    }
+    else 
+    {
+        if ((DS3231_sreg & DS3231_OSF) == DS3231_OSF)
+        {
+            printf("DS3231 not running previously!\n");
+            printf("Setting time to default...\n");
+            rtcExt.writeToAddr(DS3231_STATUS, 0x00);
+            rtcExt.saveToDS3231(&t);
+         }
+        else
+        {
+            printf("DS3231 is running!\n");
+            rtcExt.retrieveFromDS3231(&t);
+        }
+    }
+   
     gpio_init(SET_PIN);
     gpio_set_dir(SET_PIN, GPIO_IN);
     gpio_pull_up(SET_PIN);
@@ -252,6 +282,7 @@ int main()
             }
             clkDisp.resetBlinkCount();
             blinkSelect = None;
+            rtcExt.saveToDS3231(&t);
         }
         else
         {

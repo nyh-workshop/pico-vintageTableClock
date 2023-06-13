@@ -48,15 +48,16 @@ fmSynth/fmChannel.cpp
 fmSynth/patch.cpp
 miditones/miditones.cpp
 miditones/midiFreqTable.c
-miditonesFile/sampleMidi.c)
+miditonesFile/sampleMidi.c
+ds3231/ds3231.cpp)
 
 pico_generate_pio_header(pico-vintageTableClock ${CMAKE_CURRENT_LIST_DIR}/audio_i2s/audio_i2s.pio)
 
 pico_set_program_name(pico-vintageTableClock "pico-vintageTableClock")
-pico_set_program_version(pico-vintageTableClock "0.9")
+pico_set_program_version(pico-vintageTableClock "1.0")
 
 pico_enable_stdio_uart(pico-vintageTableClock 1)
-pico_enable_stdio_usb(pico-vintageTableClock 0)
+pico_enable_stdio_usb(pico-vintageTableClock 1)
 
 # Add the standard library to the build
 target_link_libraries(pico-vintageTableClock

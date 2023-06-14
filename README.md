@@ -14,10 +14,12 @@ Currently, the features are:
 - RP2040's internal RTC module to keep and tell the time.
 - Using DHT-11 module to get the temperature and humidity! Thanks to the library provided ([pico_dht](https://github.com/vmilea/pico_dht/tree/master)).
 - DS3231 module is used to help keep time when the power is off. The contents of the DS3231 is synchronized with the local RTC on the Raspberry Pico.
+- Added buzzer routines to sound it everytime a button pressed.
 
 Limitations:
 - Currently no way to stop melody when it is currently playing.
 - No error messages when DHT-11 module gives wrong results, only not showing the results on the screen.
-- Switching chime music might cause the next hour not to chime. 
+- Switching chime music might cause the next hour not to chime.
+- Sometimes beeps sounded twice when button is pressed. Possibly need to work on how to limit it to one beep per press.
 
 Schematics coming soon! :D

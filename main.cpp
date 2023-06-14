@@ -25,10 +25,11 @@ void gpio_callback_gpio(uint gpio, uint32_t events)
 {
     if (gpio == SET_PIN)
     {
+        beep();
         // Debouncing code from https://forum.arduino.cc/index.php?topic=45000.0:
         di_SetPin.current = time_us_32();
 
-        if ((di_SetPin.current - di_SetPin.last) > 250000)
+        if ((di_SetPin.current - di_SetPin.last) > 500000)
         {
             clkDisp.setEvent(setButton);
             (blinkSelect > blinkDOTW) ? blinkSelect = blinkNone : blinkSelect++;
@@ -203,10 +204,10 @@ int main()
 {
     stdio_init_all();
 
-    stdio_filter_driver(&stdio_usb);
-    while (!tud_cdc_connected())
-        sleep_ms(100);
-    printf("\nUSB Serial connected!\n");
+    // stdio_filter_driver(&stdio_usb);
+    // while (!tud_cdc_connected())
+    //     sleep_ms(100);
+    // printf("\nUSB Serial connected!\n");
 
     // Example from the Pico SDK manual!
     datetime_t t = {
@@ -249,8 +250,7 @@ int main()
     gpio_set_dir(SET_PIN, GPIO_IN);
     gpio_pull_up(SET_PIN);
 
-    gpio_init(18);
-    gpio_set_dir(18, GPIO_OUT);
+    initBuzzer();
 
     gpio_set_irq_enabled(RENCODER_CLK_PIN, GPIO_IRQ_EDGE_FALL, true);
     gpio_set_irq_enabled(RENCODER_DT_PIN, GPIO_IRQ_EDGE_FALL, true);
@@ -283,6 +283,7 @@ int main()
             clkDisp.resetBlinkCount();
             blinkSelect = None;
             rtcExt.saveToDS3231(&t);
+            disableBuzzer();
         }
         else
         {

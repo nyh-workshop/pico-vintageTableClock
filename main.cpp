@@ -1,9 +1,5 @@
 #include "main.h"
 
-const uint8_t SET_PIN = 14;
-const uint8_t RENCODER_CLK_PIN = 15;
-const uint8_t RENCODER_DT_PIN = 16;
-
 U8G2_ST7920_128X64_1_HW_SPI_CUSTOM u8g2(U8G2_R0);
 dht_t dht;
 digitalClockDisplay clkDisp;

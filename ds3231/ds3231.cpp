@@ -47,7 +47,7 @@ void PicoDS3231::retrieveFromDS3231(datetime_t* aDateTime)
     aDateTime->sec = bcdToDec(buf[0]);
     aDateTime->min = bcdToDec(buf[1]);
     aDateTime->hour = bcdToDec(buf[2]);
-    aDateTime->dotw = bcdToDec(buf[3]);
+    aDateTime->dotw = bcdToDec(buf[3]) - 1;
     aDateTime->day = bcdToDec(buf[4]);
     aDateTime->month = bcdToDec(buf[5]);
     aDateTime->year = bcdToDec(buf[6]) + 2000;    
@@ -55,10 +55,11 @@ void PicoDS3231::retrieveFromDS3231(datetime_t* aDateTime)
 
 void PicoDS3231::saveToDS3231(datetime_t* aDateTime)
 {
+    // DS3231's dotw is 1-7!
     writeToAddr(0x00, decToBcd(aDateTime->sec));
     writeToAddr(0x01, decToBcd(aDateTime->min));
     writeToAddr(0x02, decToBcd(aDateTime->hour));
-    writeToAddr(0x03, decToBcd(aDateTime->dotw));
+    writeToAddr(0x03, decToBcd(aDateTime->dotw) + 1);
     writeToAddr(0x04, decToBcd(aDateTime->day));
     writeToAddr(0x05, decToBcd(aDateTime->month));
     writeToAddr(0x06, decToBcd(aDateTime->year - 2000));

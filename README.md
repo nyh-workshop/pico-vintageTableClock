@@ -2,9 +2,17 @@
 
 ## For the submission of Cytron's RPi Pico Maker Party 2023
 
-This is currently a code draft of the vintage style table clock.
-
 Cytron's Maker Pi Pico is used with the Pico Debug Probe for the development of this code.
+
+Requirements:
+- [Cytron Maker Pico](https://my.cytron.io/p-maker-pi-pico?r=1)
+- [Latest version of RP2040 SDK - 1.5.0 and above](https://github.com/raspberrypi/pico-sdk)
+
+![Vintage Table Clock](tableClock_1.jpg)
+
+Video of the table clock in action:
+
+[![Cytron #MakerPiParty 2023 Submission: Vintage Table Clock](https://img.youtube.com/vi/SPQg1G8VzrQ/hqdefault.jpg)](https://www.youtube.com/watch?v=SPQg1G8VzrQ)
 
 Currently, the features are:
 - The sound module is called [Simple FM synth](https://github.com/nyh-workshop/pico-fmSynth) and runs on Core 1. The clock chimes every hour from 6am to 9pm. Hourly chime can be selected as Westminster or a small excerpt of Pachelbel's Canon in D.
@@ -22,4 +30,5 @@ Limitations:
 - Switching chime music might cause the next hour not to chime.
 - Sometimes beeps sounded twice when button is pressed. Possibly need to work on how to limit it to one beep per press.
 
-Schematics coming soon! :D
+Schematic:
+![Schematic](Schematic.PNG)

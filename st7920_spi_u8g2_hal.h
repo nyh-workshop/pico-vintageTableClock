@@ -16,9 +16,9 @@ extern "C"
 
 // ADD THE INIT DISPLAY 
 #define SPI_PORT spi0
-#define PIN_CS 5
-#define PIN_SCK 2
-#define PIN_MOSI 3
+#define PIN_CS 5 // RS
+#define PIN_SCK 2 // E 
+#define PIN_MOSI 3 // RW
 #define SPI_SPEED 800 * 1000
 #define PIN_RST 13
 

@@ -18,7 +18,7 @@
 #include "ds3231/ds3231.h"
 #include "MakerPicoBuzzer/MakerPicoBuzzer.h"
 
-#define MAKER_NANO_RP2040
+//#define MAKER_NANO_RP2040
 
 const dht_model_t DHT_MODEL = DHT11;
 

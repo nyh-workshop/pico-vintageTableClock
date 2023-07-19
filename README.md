@@ -7,6 +7,7 @@ Cytron's Maker Pi Pico is used with the Pico Debug Probe for the development of 
 Requirements:
 - [Cytron Maker Pico](https://my.cytron.io/p-maker-pi-pico?r=1)
 - [Latest version of RP2040 SDK - 1.5.0 and above](https://github.com/raspberrypi/pico-sdk)
+- For easy Windows installation, please use this [one](https://github.com/raspberrypi/pico-setup-windows). Click on "Download the latest release".
 
 ![Vintage Table Clock](tableClock_1.jpg)
 
